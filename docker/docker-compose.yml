@@ -41,6 +41,8 @@ version: '2'
 #    can watch the startup sequence.
 # 3) When you're done for the day, type Ctrl-C then 'docker-compose stop'
 #
+# If you want to connect to the docker command line us:
+#   docker exec -it bigdata_sandbox_1 bash
 #
 # ALSO SEE:
 #  Hortonworks docker image:
@@ -55,6 +57,8 @@ version: '2'
 #   Warning yarn.nodemanager.resource.memory-mb 2250 is greater than the recommended
 #           maximum of 1997. Amount of physical memory, in MB, that can be allocated 
 #           for containers.
+#
+# Apache spark doesn't work thru zeppelin
 #
 # DISCLAIMERS: No guarantees or warranties, use at your own risk.
 # 
