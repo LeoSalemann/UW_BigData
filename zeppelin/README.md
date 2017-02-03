@@ -9,5 +9,5 @@ Notes
 
 | Item               | Purpose     | 
 | -----------------: |:-------------|
-| foo.json |  notebook based on week2.pdf slides 32-101.|
+| BigData_Lecture_170201.json |  Notebook based on Lecture from 2017 Feb 1. Covers week2.pdf slides 32-101.|
 
