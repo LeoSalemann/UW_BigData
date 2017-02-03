@@ -1,1 +1,3152 @@
-﻿{"paragraphs":[{"config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486107922358_124745742","id":"20170203-074522_1240323190","dateCreated":"2017-02-03T07:45:22+0000","status":"READY","progressUpdateIntervalMs":500,"focus":true,"$$hashKey":"object:6413"},{"title":"Big Data Lecture 2/1/17","text":"This notebook is based on week2.pdf, slides 33-101\nMuch of the material prior to slide 33 can be found in the notebook Hello World\nIf your Zeppelin notebooks are in folders, you should find Hello World under Getting Started.  Otherwise, it will just be at the top-level with \neverything else.","user":"admin","dateUpdated":"2017-02-03T07:45:13+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486001542205_1152417599","id":"20170202-021222_1768723482","result":{"code":"SUCCESS","type":"TEXT","msg":""},"dateCreated":"2017-02-02T02:12:22+0000","dateStarted":"2017-02-02T07:45:52+0000","dateFinished":"2017-02-02T07:45:52+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3453"},{"title":"Creating RDDs (slide 33)","text":"%pyspark\n\nmyRdd = sc. parallelize([1,2,3,4])\nmyRdd.map(lambda x: x+x)\nprint myRdd.take(2)\n","user":"admin","dateUpdated":"2017-02-02T07:56:22+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486021967388_558448046","id":"20170202-075247_446153906","result":{"code":"SUCCESS","type":"TEXT","msg":"[1, 2]\n"},"dateCreated":"2017-02-02T07:52:47+0000","dateStarted":"2017-02-02T07:56:22+0000","dateFinished":"2017-02-02T07:56:22+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3454"},{"title":"foreach() (slide 34)","text":"%pyspark\n\nrdd = sc.parallelize([1, 2, 3, 4])\n# rdd.foreach(lambda x: print(x))\n","user":"admin","dateUpdated":"2017-02-02T08:00:14+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486022191111_936020822","id":"20170202-075631_1565414958","result":{"code":"SUCCESS","type":"TEXT","msg":""},"dateCreated":"2017-02-02T07:56:31+0000","dateStarted":"2017-02-02T08:00:14+0000","dateFinished":"2017-02-02T08:00:14+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3455"},{"title":"Reduce (slide 36)","text":"%pyspark\nsum = rdd.reduce(lambda x, y: x + y)\nprint sum\n\n# these won't work, ned to create a nums rdd and some other stuff, probably\n# sumCount = nums.aggregate((0, 0), (lambda acc, value: (acc[0] + value, acc[1] + 1)), (lambda acc1, acc2: (acc1[0] + acc2[0], acc1[1] + acc2[1])))\n# return sumCount[0] / float(sumCount[1])","user":"admin","dateUpdated":"2017-02-02T08:06:00+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486022333194_1801872768","id":"20170202-075853_533268507","result":{"code":"SUCCESS","type":"TEXT","msg":"10\n"},"dateCreated":"2017-02-02T07:58:53+0000","dateStarted":"2017-02-02T08:06:00+0000","dateFinished":"2017-02-02T08:06:00+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3456"},{"text":"%pyspark\n\ninput_file = \"hdfs:///tmp/kddcup.data_10_percent.gz\"\n\nraw_rdd = sc.textFile(input_file)\nprint raw_rdd.count()","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486010547762_-1578381565","id":"20170202-044227_1387905609","result":{"code":"SUCCESS","type":"TEXT","msg":"494021\n"},"dateCreated":"2017-02-02T04:42:27+0000","dateStarted":"2017-02-02T07:45:52+0000","dateFinished":"2017-02-02T07:45:54+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3457"},{"text":"%pyspark\r\rdf1 = sc.parallelize([Row(cid='101', name='Alice', age=25, state='ca'), Row(cid='102', name='Bob', age=15, state='ny'), Row(cid='103', name='Bob', age=23, state='nc'), Row(cid='104', name='Ram', age=45, state='fl')]).toDF()\r","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486004747680_-1353883306","id":"20170202-030547_1118986594","result":{"code":"SUCCESS","type":"TEXT","msg":""},"dateCreated":"2017-02-02T03:05:47+0000","dateStarted":"2017-02-02T07:45:52+0000","dateFinished":"2017-02-02T07:45:54+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3458"},{"text":"%pyspark\ndf2 = sc.parallelize([Row(cid='101', date='2015-03-12', product='toaster', price=200), Row(cid='104', date='2015-04-12', product='iron', price=120), Row(cid='102', date='2014-12-31', product='fridge', price=850), Row(cid='102', date='2015-02-03', product='cup', price=5)]).toDF()","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486006414942_55859089","id":"20170202-033334_1656542187","result":{"code":"SUCCESS","type":"TEXT","msg":""},"dateCreated":"2017-02-02T03:33:34+0000","dateStarted":"2017-02-02T07:45:54+0000","dateFinished":"2017-02-02T07:45:54+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3459"},{"text":"%pyspark\nprint df1.first()\nprint df1.take(2)\n","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486008019375_933566565","id":"20170202-040019_1451025415","result":{"code":"SUCCESS","type":"TEXT","msg":"Row(age=25, cid=u'101', name=u'Alice', state=u'ca')\n[Row(age=25, cid=u'101', name=u'Alice', state=u'ca'), Row(age=15, cid=u'102', name=u'Bob', state=u'ny')]\n"},"dateCreated":"2017-02-02T04:00:19+0000","dateStarted":"2017-02-02T07:45:54+0000","dateFinished":"2017-02-02T07:45:54+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3460"},{"text":"%pyspark\ndf1.show(99)\n# print '-----------<next thingy >--------'\nprint ' ' \nprint ' ' \ndf1.limit(2).show()","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486008068643_2047307361","id":"20170202-040108_1851654302","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \n \n+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n+---+---+-----+-----+\n\n"},"dateCreated":"2017-02-02T04:01:08+0000","dateStarted":"2017-02-02T07:45:54+0000","dateFinished":"2017-02-02T07:45:54+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3461"},{"title":"Inspecting Schema (slide 74)","text":"%pyspark\ndf1.show(99)\nprint ' '\nprint df1.columns  #Display column names\nprint ' ' \nprint df1.dtypes  #Display column names and types\n\nprint ' ' \nprint df1.schema  #Display detailed schema\nprint ' ' \n","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486008254892_-1064497415","id":"20170202-040414_39152403","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \n['age', 'cid', 'name', 'state']\n \n[('age', 'bigint'), ('cid', 'string'), ('name', 'string'), ('state', 'string')]\n \nStructType(List(StructField(age,LongType,true),StructField(cid,StringType,true),StructField(name,StringType,true),StructField(state,StringType,true)))\n \n"},"dateCreated":"2017-02-02T04:04:14+0000","dateStarted":"2017-02-02T07:45:54+0000","dateFinished":"2017-02-02T07:45:54+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3462"},{"title":"Counting rows (slide 75)","text":"%pyspark\n\nprint df1.count()\nprint df1.rdd.count()\n","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486009359147_-1561521012","id":"20170202-042239_578808250","result":{"code":"SUCCESS","type":"TEXT","msg":"4\n4\n"},"dateCreated":"2017-02-02T04:22:39+0000","dateStarted":"2017-02-02T07:45:54+0000","dateFinished":"2017-02-02T07:45:54+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3463"},{"title":"Extracting a smaller sample of the RDD (slide 77)","text":"%pyspark\n\ninput_file = \"hdfs:///tmp/kddcup.data_10_percent.gz\"\n\nraw_rdd = sc.textFile(input_file)\nraw_rdd_sample = raw_rdd.sample(False, 0.1, 1234)\n\nprint 'raw_rdd_sample has', raw_rdd_sample.count(), 'records'\nprint 'raw_rdd        has', raw_rdd.count(), 'records'","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486010882353_1917738100","id":"20170202-044802_383697225","result":{"code":"SUCCESS","type":"TEXT","msg":"raw_rdd_sample has 49493 records\nraw_rdd        has 494021 records\n"},"dateCreated":"2017-02-02T04:48:02+0000","dateStarted":"2017-02-02T07:45:54+0000","dateFinished":"2017-02-02T07:45:58+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3464"},{"title":"Summary Statistics (slide 78)","text":"%pyspark\ndf1.describe().show()","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486015692819_-1053433589","id":"20170202-060812_1867203088","result":{"code":"SUCCESS","type":"TEXT","msg":"+-------+------------------+\n|summary|               age|\n+-------+------------------+\n|  count|                 4|\n|   mean|              27.0|\n| stddev|12.754084313139327|\n|    min|                15|\n|    max|                45|\n+-------+------------------+\n\n"},"dateCreated":"2017-02-02T06:08:12+0000","dateStarted":"2017-02-02T07:45:55+0000","dateFinished":"2017-02-02T07:45:58+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3465"},{"title":"Removing duplicates (slide 79)","text":"%pyspark\ndf1.distinct().show()","user":"admin","dateUpdated":"2017-02-02T07:45:52+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486015772421_609759285","id":"20170202-060932_722078326","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 23|103|  Bob|   nc|\n| 15|102|  Bob|   ny|\n| 45|104|  Ram|   fl|\n| 25|101|Alice|   ca|\n+---+---+-----+-----+\n\n"},"dateCreated":"2017-02-02T06:09:32+0000","dateStarted":"2017-02-02T07:45:58+0000","dateFinished":"2017-02-02T07:45:58+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3466"},{"title":"Removing duplicate rows by speci c columns (slide 80)","text":"%pyspark\ndf1.drop_duplicates([\"name\"]).show()\n","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486015840773_-82480607","id":"20170202-061040_1038147835","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 45|104|  Ram|   fl|\n| 25|101|Alice|   ca|\n| 23|103|  Bob|   nc|\n+---+---+-----+-----+\n\n"},"dateCreated":"2017-02-02T06:10:40+0000","dateStarted":"2017-02-02T07:45:58+0000","dateFinished":"2017-02-02T07:45:59+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3467"},{"title":"Sorting rows (slide 81)","text":"%pyspark\n# desc means descending, not describe!\ndf1.sort(df1[\"age\"].desc()).show()\nprint ' '\ndf1.sort(\"age\", ascending=True).show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486016269168_-1988361381","id":"20170202-061749_129250159","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 45|104|  Ram|   fl|\n| 25|101|Alice|   ca|\n| 23|103|  Bob|   nc|\n| 15|102|  Bob|   ny|\n+---+---+-----+-----+\n\n \n+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 25|101|Alice|   ca|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n"},"dateCreated":"2017-02-02T06:17:49+0000","dateStarted":"2017-02-02T07:45:59+0000","dateFinished":"2017-02-02T07:45:59+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3468"},{"title":"Adding a column (slide 82)","text":"%pyspark\ndf1.withColumn('age-dog-years', df1.age*7).show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486016532272_-138120889","id":"20170202-062212_1528928092","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+-------------+\n|age|cid| name|state|age-dog-years|\n+---+---+-----+-----+-------------+\n| 25|101|Alice|   ca|          175|\n| 15|102|  Bob|   ny|          105|\n| 23|103|  Bob|   nc|          161|\n| 45|104|  Ram|   fl|          315|\n+---+---+-----+-----+-------------+\n\n"},"dateCreated":"2017-02-02T06:22:12+0000","dateStarted":"2017-02-02T07:45:59+0000","dateFinished":"2017-02-02T07:45:59+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3469"},{"title":"Renaming a column (slide 83)","text":"%pyspark\n\ndf1.withColumnRenamed('age', 'age2').show()\n","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486016610859_-17939670","id":"20170202-062330_1288746118","result":{"code":"SUCCESS","type":"TEXT","msg":"+----+---+-----+-----+\n|age2|cid| name|state|\n+----+---+-----+-----+\n|  25|101|Alice|   ca|\n|  15|102|  Bob|   ny|\n|  23|103|  Bob|   nc|\n|  45|104|  Ram|   fl|\n+----+---+-----+-----+\n\n"},"dateCreated":"2017-02-02T06:23:30+0000","dateStarted":"2017-02-02T07:45:59+0000","dateFinished":"2017-02-02T07:45:59+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3470"},{"title":"select() operator (slide 84)","text":"%pyspark\n# DataFrames allow the developer to only select some columns of the DataFrame.\n\ndf1.select('name', 'age').show()\nprint ' ' \ndf1.select(df1.name, df1.age*7).show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486016672638_1048660902","id":"20170202-062432_1380000715","result":{"code":"SUCCESS","type":"TEXT","msg":"+-----+---+\n| name|age|\n+-----+---+\n|Alice| 25|\n|  Bob| 15|\n|  Bob| 23|\n|  Ram| 45|\n+-----+---+\n\n \n+-----+---------+\n| name|(age * 7)|\n+-----+---------+\n|Alice|      175|\n|  Bob|      105|\n|  Bob|      161|\n|  Ram|      315|\n+-----+---------+\n\n"},"dateCreated":"2017-02-02T06:24:32+0000","dateStarted":"2017-02-02T07:45:59+0000","dateFinished":"2017-02-02T07:45:59+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3471"},{"title":"selectExpr() operator (slide 85)","text":"%pyspark\n# The select expression accepts a sql query\ndf1.selectExpr('substr(name,1,3)', 'age*7').show()\n","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486016814195_1190034482","id":"20170202-062654_420131878","result":{"code":"SUCCESS","type":"TEXT","msg":"+----------------+---------+\n|substr(name,1,3)|(age * 7)|\n+----------------+---------+\n|             Ali|      175|\n|             Bob|      105|\n|             Bob|      161|\n|             Ram|      315|\n+----------------+---------+\n\n"},"dateCreated":"2017-02-02T06:26:54+0000","dateStarted":"2017-02-02T07:46:00+0000","dateFinished":"2017-02-02T07:46:00+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3472"},{"title":"Column expression (slide 86)","text":"%pyspark\n# Operations can be done on column objects, here are some examples:\n# Cast to type: \ndf1.age.cast('string')\n# df1.show()\n# print ' ' \n\n#Rename a column: \ndf1.age.alias('age2')\n\n#Sort a column: \ndf1.age.asc()\ndf1.age.desc() \n \n\n# Substring: \ndf1.name.substr(1,3) \n\n# Between:\ndf1.age.between(25, 34) # 25<=age<=34","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486017052468_1014325184","id":"20170202-063052_1092878917","result":{"code":"SUCCESS","type":"TEXT","msg":""},"dateCreated":"2017-02-02T06:30:52+0000","dateStarted":"2017-02-02T07:46:00+0000","dateFinished":"2017-02-02T07:46:00+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3473"},{"title":"Dropping columns (slide 87)","text":"%pyspark\rdf1.drop('age').show()\r","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486018068901_-138699395","id":"20170202-064748_1366362056","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+-----+-----+\n|cid| name|state|\n+---+-----+-----+\n|101|Alice|   ca|\n|102|  Bob|   ny|\n|103|  Bob|   nc|\n|104|  Ram|   fl|\n+---+-----+-----+\n\n"},"dateCreated":"2017-02-02T06:47:48+0000","dateStarted":"2017-02-02T07:46:00+0000","dateFinished":"2017-02-02T07:46:00+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3474"},{"title":"Filtering rows (slide 88)","text":"%pyspark\n# DataFrames support  filtering rows, like with the Core RDD library\nprint 'original df1'\ndf1.show()\nprint ' '\n\nprint 'filtered'\ndf1.filter(df1.age>21).show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486017811223_-1009369188","id":"20170202-064331_1610919923","result":{"code":"SUCCESS","type":"TEXT","msg":"original df1\n+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \nfiltered\n+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n"},"dateCreated":"2017-02-02T06:43:31+0000","dateStarted":"2017-02-02T07:46:00+0000","dateFinished":"2017-02-02T07:46:00+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3475"},{"title":"groupBy() (slide 89)","text":"%pyspark\n# DataFrames provide a groupBy api. After using a groupBy, ensure an aggregator comes next\ndf1.show()\nprint ' ' \n\ndf1.groupBy('name').count().show()\n","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486018381833_-109213292","id":"20170202-065301_2056257216","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \n+-----+-----+\n| name|count|\n+-----+-----+\n|  Ram|    1|\n|Alice|    1|\n|  Bob|    2|\n+-----+-----+\n\n"},"dateCreated":"2017-02-02T06:53:01+0000","dateStarted":"2017-02-02T07:46:00+0000","dateFinished":"2017-02-02T07:46:01+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3476"},{"title":"groupBy and sum() (slide 90)","text":"%pyspark\ndf2.show()\nprint ' ' \n\ndf2.select(df2[\"date\"].substr(1,4).alias(\"year\"), df2[\"price\"]).groupBy(\"year\").sum().show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486018499862_-1894094088","id":"20170202-065459_938819619","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+----------+-----+-------+\n|cid|      date|price|product|\n+---+----------+-----+-------+\n|101|2015-03-12|  200|toaster|\n|104|2015-04-12|  120|   iron|\n|102|2014-12-31|  850| fridge|\n|102|2015-02-03|    5|    cup|\n+---+----------+-----+-------+\n\n \n+----+----------+\n|year|sum(price)|\n+----+----------+\n|2014|       850|\n|2015|       325|\n+----+----------+\n\n"},"dateCreated":"2017-02-02T06:54:59+0000","dateStarted":"2017-02-02T07:46:01+0000","dateFinished":"2017-02-02T07:46:01+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3477"},{"title":"groupBy and agg() (slide 91)","text":"%pyspark\n\n# DataFrames provide a generic function for implementing aggregations after groupBy.\n# The agg() takes a dictionary mapping column names to aggregate functions (min, max, \n# count, avg, sum). There can be multiple columns in the groupBy as well, just separate\n# them with commas\n\ndf2.show()\nprint ' '\n\ndf2.select(df2['date'].substr(1,4).alias('year'), df2['price']).groupBy('year').agg({'price': 'avg', 'year': 'count'}).show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486018557046_567437430","id":"20170202-065557_1055540894","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+----------+-----+-------+\n|cid|      date|price|product|\n+---+----------+-----+-------+\n|101|2015-03-12|  200|toaster|\n|104|2015-04-12|  120|   iron|\n|102|2014-12-31|  850| fridge|\n|102|2015-02-03|    5|    cup|\n+---+----------+-----+-------+\n\n \n+----+-----------+------------------+\n|year|count(year)|        avg(price)|\n+----+-----------+------------------+\n|2014|          1|             850.0|\n|2015|          3|108.33333333333333|\n+----+-----------+------------------+\n\n"},"dateCreated":"2017-02-02T06:55:57+0000","dateStarted":"2017-02-02T07:46:01+0000","dateFinished":"2017-02-02T07:46:02+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3478"},{"title":"Inner Join with Data Frames (print 92)","text":"%pyspark\ndf1.show()\nprint ' '\n\ndf2.show()\nprint ' ' \n\ndf1.join(df2, df1[\"cid\"]==df2[\"cid\"], \"inner\").show()\n\n","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486018884110_-1116979052","id":"20170202-070124_284801631","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \n+---+----------+-----+-------+\n|cid|      date|price|product|\n+---+----------+-----+-------+\n|101|2015-03-12|  200|toaster|\n|104|2015-04-12|  120|   iron|\n|102|2014-12-31|  850| fridge|\n|102|2015-02-03|    5|    cup|\n+---+----------+-----+-------+\n\n \n+---+---+-----+-----+---+----------+-----+-------+\n|age|cid| name|state|cid|      date|price|product|\n+---+---+-----+-----+---+----------+-----+-------+\n| 25|101|Alice|   ca|101|2015-03-12|  200|toaster|\n| 15|102|  Bob|   ny|102|2014-12-31|  850| fridge|\n| 15|102|  Bob|   ny|102|2015-02-03|    5|    cup|\n| 45|104|  Ram|   fl|104|2015-04-12|  120|   iron|\n+---+---+-----+-----+---+----------+-----+-------+\n\n"},"dateCreated":"2017-02-02T07:01:24+0000","dateStarted":"2017-02-02T07:46:02+0000","dateFinished":"2017-02-02T07:46:02+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3479"},{"title":"Other types of join (slide 93)","text":"%pyspark\ndf1.join(df2, \"cid\", \"inner\").show()\nprint ' ' \n\ndf1.join(df2, df1[\"cid\"]==df2[\"cid\"], \"inner\").show()\nprint ' ' ","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486019007947_852366678","id":"20170202-070327_1856424785","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+-----+-----+----------+-----+-------+\n|cid|age| name|state|      date|price|product|\n+---+---+-----+-----+----------+-----+-------+\n|101| 25|Alice|   ca|2015-03-12|  200|toaster|\n|102| 15|  Bob|   ny|2014-12-31|  850| fridge|\n|102| 15|  Bob|   ny|2015-02-03|    5|    cup|\n|104| 45|  Ram|   fl|2015-04-12|  120|   iron|\n+---+---+-----+-----+----------+-----+-------+\n\n \n+---+---+-----+-----+---+----------+-----+-------+\n|age|cid| name|state|cid|      date|price|product|\n+---+---+-----+-----+---+----------+-----+-------+\n| 25|101|Alice|   ca|101|2015-03-12|  200|toaster|\n| 15|102|  Bob|   ny|102|2014-12-31|  850| fridge|\n| 15|102|  Bob|   ny|102|2015-02-03|    5|    cup|\n| 45|104|  Ram|   fl|104|2015-04-12|  120|   iron|\n+---+---+-----+-----+---+----------+-----+-------+\n\n \n"},"dateCreated":"2017-02-02T07:03:27+0000","dateStarted":"2017-02-02T07:46:02+0000","dateFinished":"2017-02-02T07:46:04+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3480"},{"title":"Multiple Conditions in joinExpr (slide 94)","text":"%pyspark\n\n# DataFrames also supports multiple condititions in the joinExpr\ndf1.join(df2, (df1['cid']==df2['cid']) & (df2['price'] > 200), 'inner').show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486019282797_-773583818","id":"20170202-070802_2083744601","result":{"code":"SUCCESS","type":"TEXT","msg":"+---+---+----+-----+---+----------+-----+-------+\n|age|cid|name|state|cid|      date|price|product|\n+---+---+----+-----+---+----------+-----+-------+\n| 15|102| Bob|   ny|102|2014-12-31|  850| fridge|\n+---+---+----+-----+---+----------+-----+-------+\n\n"},"dateCreated":"2017-02-02T07:08:02+0000","dateStarted":"2017-02-02T07:46:03+0000","dateFinished":"2017-02-02T07:46:04+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3481"},{"title":"Creating a Schema and creating a DataFrame (slide 95)","text":"%pyspark\ninput_file = \"hdfs:///tmp/kddcup.data_10_percent.gz\"\n\nraw_rdd = sc.textFile(input_file)\nprint raw_rdd.take(1)\nprint ' '\n\ncsv_rdd = raw_rdd.map(lambda x: x.split(\",\"))\nprint csv_rdd.take(1)\nprint ' ' \n\nrow_data = csv_rdd.map(lambda p: Row(\n    duration=int(p[0]),\n    protocol_type=p[1],\n    service=p[2],\n    flag=p[3],\n    src_bytes=int(p[4]),\n    dst_bytes=int(p[5])\n    )\n)\n\ninteractions_df = sqlContext.createDataFrame(row_data)\ninteractions_df.registerTempTable(\"interactions\")","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486019950120_475241068","id":"20170202-071910_2075399594","result":{"code":"SUCCESS","type":"TEXT","msg":"[u'0,tcp,http,SF,181,5450,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,8,8,0.00,0.00,0.00,0.00,1.00,0.00,0.00,9,9,1.00,0.00,0.11,0.00,0.00,0.00,0.00,0.00,normal.']\n \n[[u'0', u'tcp', u'http', u'SF', u'181', u'5450', u'0', u'0', u'0', u'0', u'0', u'1', u'0', u'0', u'0', u'0', u'0', u'0', u'0', u'0', u'0', u'0', u'8', u'8', u'0.00', u'0.00', u'0.00', u'0.00', u'1.00', u'0.00', u'0.00', u'9', u'9', u'1.00', u'0.00', u'0.11', u'0.00', u'0.00', u'0.00', u'0.00', u'0.00', u'normal.']]\n \n"},"dateCreated":"2017-02-02T07:19:10+0000","dateStarted":"2017-02-02T07:46:04+0000","dateFinished":"2017-02-02T07:46:04+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3482"},{"title":"Quering with SQL (slide 96)","text":"%sql\r\rSELECT duration, dst_bytes FROM interactions\rWHERE protocol_type = 'tcp'\rAND duration > 1000\rAND dst_bytes = 0\r","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/sql","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486006871430_333305730","id":"20170202-034111_1072074873","result":{"code":"SUCCESS","type":"TABLE","msg":"duration\tdst_bytes\n5057\t0\n5059\t0\n5051\t0\n5056\t0\n5051\t0\n5039\t0\n5062\t0\n5041\t0\n5056\t0\n5064\t0\n5043\t0\n5061\t0\n5049\t0\n5061\t0\n5048\t0\n5047\t0\n5044\t0\n5063\t0\n5068\t0\n5062\t0\n5046\t0\n5052\t0\n5044\t0\n5054\t0\n5039\t0\n5058\t0\n5051\t0\n5032\t0\n5063\t0\n5040\t0\n5051\t0\n5066\t0\n5044\t0\n5051\t0\n5036\t0\n5055\t0\n2426\t0\n5047\t0\n5057\t0\n5037\t0\n5057\t0\n5062\t0\n5051\t0\n5051\t0\n5053\t0\n5064\t0\n5044\t0\n5051\t0\n5033\t0\n5066\t0\n5063\t0\n5056\t0\n5042\t0\n5063\t0\n5060\t0\n5056\t0\n5049\t0\n5043\t0\n5039\t0\n5041\t0\n42448\t0\n42088\t0\n41065\t0\n40929\t0\n40806\t0\n40682\t0\n40571\t0\n40448\t0\n40339\t0\n40232\t0\n40121\t0\n36783\t0\n36674\t0\n36570\t0\n36467\t0\n36323\t0\n36204\t0\n32038\t0\n31925\t0\n31809\t0\n31709\t0\n31601\t0\n31501\t0\n31401\t0\n31301\t0\n31194\t0\n31061\t0\n30935\t0\n30835\t0\n30735\t0\n30619\t0\n30518\t0\n30418\t0\n30317\t0\n30217\t0\n30077\t0\n25420\t0\n22921\t0\n22821\t0\n22721\t0\n22616\t0\n22516\t0\n22416\t0\n22316\t0\n22216\t0\n21987\t0\n21887\t0\n21767\t0\n21661\t0\n21561\t0\n21455\t0\n21334\t0\n21223\t0\n21123\t0\n20983\t0\n14682\t0\n14420\t0\n14319\t0\n14198\t0\n14098\t0\n13998\t0\n13898\t0\n13796\t0\n13678\t0\n13578\t0\n13448\t0\n13348\t0\n13241\t0\n13141\t0\n13033\t0\n12933\t0\n12833\t0\n12733\t0\n12001\t0\n5678\t0\n5010\t0\n1298\t0\n1031\t0\n36438\t0\n","comment":"","msgTable":[[{"key":"dst_bytes","value":"5057"},{"key":"dst_bytes","value":"0"}],[{"value":"5059"},{"value":"0"}],[{"value":"5051"},{"value":"0"}],[{"value":"5056"},{"value":"0"}],[{"value":"5051"},{"value":"0"}],[{"value":"5039"},{"value":"0"}],[{"value":"5062"},{"value":"0"}],[{"value":"5041"},{"value":"0"}],[{"value":"5056"},{"value":"0"}],[{"value":"5064"},{"value":"0"}],[{"value":"5043"},{"value":"0"}],[{"value":"5061"},{"value":"0"}],[{"value":"5049"},{"value":"0"}],[{"value":"5061"},{"value":"0"}],[{"value":"5048"},{"value":"0"}],[{"value":"5047"},{"value":"0"}],[{"value":"5044"},{"value":"0"}],[{"value":"5063"},{"value":"0"}],[{"value":"5068"},{"value":"0"}],[{"value":"5062"},{"value":"0"}],[{"value":"5046"},{"value":"0"}],[{"value":"5052"},{"value":"0"}],[{"value":"5044"},{"value":"0"}],[{"value":"5054"},{"value":"0"}],[{"value":"5039"},{"value":"0"}],[{"value":"5058"},{"value":"0"}],[{"value":"5051"},{"value":"0"}],[{"value":"5032"},{"value":"0"}],[{"value":"5063"},{"value":"0"}],[{"value":"5040"},{"value":"0"}],[{"value":"5051"},{"value":"0"}],[{"value":"5066"},{"value":"0"}],[{"value":"5044"},{"value":"0"}],[{"value":"5051"},{"value":"0"}],[{"value":"5036"},{"value":"0"}],[{"value":"5055"},{"value":"0"}],[{"value":"2426"},{"value":"0"}],[{"value":"5047"},{"value":"0"}],[{"value":"5057"},{"value":"0"}],[{"value":"5037"},{"value":"0"}],[{"value":"5057"},{"value":"0"}],[{"value":"5062"},{"value":"0"}],[{"value":"5051"},{"value":"0"}],[{"value":"5051"},{"value":"0"}],[{"value":"5053"},{"value":"0"}],[{"value":"5064"},{"value":"0"}],[{"value":"5044"},{"value":"0"}],[{"value":"5051"},{"value":"0"}],[{"value":"5033"},{"value":"0"}],[{"value":"5066"},{"value":"0"}],[{"value":"5063"},{"value":"0"}],[{"value":"5056"},{"value":"0"}],[{"value":"5042"},{"value":"0"}],[{"value":"5063"},{"value":"0"}],[{"value":"5060"},{"value":"0"}],[{"value":"5056"},{"value":"0"}],[{"value":"5049"},{"value":"0"}],[{"value":"5043"},{"value":"0"}],[{"value":"5039"},{"value":"0"}],[{"value":"5041"},{"value":"0"}],[{"value":"42448"},{"value":"0"}],[{"value":"42088"},{"value":"0"}],[{"value":"41065"},{"value":"0"}],[{"value":"40929"},{"value":"0"}],[{"value":"40806"},{"value":"0"}],[{"value":"40682"},{"value":"0"}],[{"value":"40571"},{"value":"0"}],[{"value":"40448"},{"value":"0"}],[{"value":"40339"},{"value":"0"}],[{"value":"40232"},{"value":"0"}],[{"value":"40121"},{"value":"0"}],[{"value":"36783"},{"value":"0"}],[{"value":"36674"},{"value":"0"}],[{"value":"36570"},{"value":"0"}],[{"value":"36467"},{"value":"0"}],[{"value":"36323"},{"value":"0"}],[{"value":"36204"},{"value":"0"}],[{"value":"32038"},{"value":"0"}],[{"value":"31925"},{"value":"0"}],[{"value":"31809"},{"value":"0"}],[{"value":"31709"},{"value":"0"}],[{"value":"31601"},{"value":"0"}],[{"value":"31501"},{"value":"0"}],[{"value":"31401"},{"value":"0"}],[{"value":"31301"},{"value":"0"}],[{"value":"31194"},{"value":"0"}],[{"value":"31061"},{"value":"0"}],[{"value":"30935"},{"value":"0"}],[{"value":"30835"},{"value":"0"}],[{"value":"30735"},{"value":"0"}],[{"value":"30619"},{"value":"0"}],[{"value":"30518"},{"value":"0"}],[{"value":"30418"},{"value":"0"}],[{"value":"30317"},{"value":"0"}],[{"value":"30217"},{"value":"0"}],[{"value":"30077"},{"value":"0"}],[{"value":"25420"},{"value":"0"}],[{"value":"22921"},{"value":"0"}],[{"value":"22821"},{"value":"0"}],[{"value":"22721"},{"value":"0"}],[{"value":"22616"},{"value":"0"}],[{"value":"22516"},{"value":"0"}],[{"value":"22416"},{"value":"0"}],[{"value":"22316"},{"value":"0"}],[{"value":"22216"},{"value":"0"}],[{"value":"21987"},{"value":"0"}],[{"value":"21887"},{"value":"0"}],[{"value":"21767"},{"value":"0"}],[{"value":"21661"},{"value":"0"}],[{"value":"21561"},{"value":"0"}],[{"value":"21455"},{"value":"0"}],[{"value":"21334"},{"value":"0"}],[{"value":"21223"},{"value":"0"}],[{"value":"21123"},{"value":"0"}],[{"value":"20983"},{"value":"0"}],[{"value":"14682"},{"value":"0"}],[{"value":"14420"},{"value":"0"}],[{"value":"14319"},{"value":"0"}],[{"value":"14198"},{"value":"0"}],[{"value":"14098"},{"value":"0"}],[{"value":"13998"},{"value":"0"}],[{"value":"13898"},{"value":"0"}],[{"value":"13796"},{"value":"0"}],[{"value":"13678"},{"value":"0"}],[{"value":"13578"},{"value":"0"}],[{"value":"13448"},{"value":"0"}],[{"value":"13348"},{"value":"0"}],[{"value":"13241"},{"value":"0"}],[{"value":"13141"},{"value":"0"}],[{"value":"13033"},{"value":"0"}],[{"value":"12933"},{"value":"0"}],[{"value":"12833"},{"value":"0"}],[{"value":"12733"},{"value":"0"}],[{"value":"12001"},{"value":"0"}],[{"value":"5678"},{"value":"0"}],[{"value":"5010"},{"value":"0"}],[{"value":"1298"},{"value":"0"}],[{"value":"1031"},{"value":"0"}],[{"value":"36438"},{"value":"0"}]],"columnNames":[{"name":"duration","index":0,"aggr":"sum"},{"name":"dst_bytes","index":1,"aggr":"sum"}],"rows":[["5057","0"],["5059","0"],["5051","0"],["5056","0"],["5051","0"],["5039","0"],["5062","0"],["5041","0"],["5056","0"],["5064","0"],["5043","0"],["5061","0"],["5049","0"],["5061","0"],["5048","0"],["5047","0"],["5044","0"],["5063","0"],["5068","0"],["5062","0"],["5046","0"],["5052","0"],["5044","0"],["5054","0"],["5039","0"],["5058","0"],["5051","0"],["5032","0"],["5063","0"],["5040","0"],["5051","0"],["5066","0"],["5044","0"],["5051","0"],["5036","0"],["5055","0"],["2426","0"],["5047","0"],["5057","0"],["5037","0"],["5057","0"],["5062","0"],["5051","0"],["5051","0"],["5053","0"],["5064","0"],["5044","0"],["5051","0"],["5033","0"],["5066","0"],["5063","0"],["5056","0"],["5042","0"],["5063","0"],["5060","0"],["5056","0"],["5049","0"],["5043","0"],["5039","0"],["5041","0"],["42448","0"],["42088","0"],["41065","0"],["40929","0"],["40806","0"],["40682","0"],["40571","0"],["40448","0"],["40339","0"],["40232","0"],["40121","0"],["36783","0"],["36674","0"],["36570","0"],["36467","0"],["36323","0"],["36204","0"],["32038","0"],["31925","0"],["31809","0"],["31709","0"],["31601","0"],["31501","0"],["31401","0"],["31301","0"],["31194","0"],["31061","0"],["30935","0"],["30835","0"],["30735","0"],["30619","0"],["30518","0"],["30418","0"],["30317","0"],["30217","0"],["30077","0"],["25420","0"],["22921","0"],["22821","0"],["22721","0"],["22616","0"],["22516","0"],["22416","0"],["22316","0"],["22216","0"],["21987","0"],["21887","0"],["21767","0"],["21661","0"],["21561","0"],["21455","0"],["21334","0"],["21223","0"],["21123","0"],["20983","0"],["14682","0"],["14420","0"],["14319","0"],["14198","0"],["14098","0"],["13998","0"],["13898","0"],["13796","0"],["13678","0"],["13578","0"],["13448","0"],["13348","0"],["13241","0"],["13141","0"],["13033","0"],["12933","0"],["12833","0"],["12733","0"],["12001","0"],["5678","0"],["5010","0"],["1298","0"],["1031","0"],["36438","0"]]},"dateCreated":"2017-02-02T03:41:11+0000","dateStarted":"2017-02-02T07:46:04+0000","dateFinished":"2017-02-02T07:46:13+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3483"},{"title":"Printing the Schema (slide 97)","text":"%pyspark\ninteractions_df.printSchema()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486006891141_-2179987","id":"20170202-034131_2036569484","result":{"code":"SUCCESS","type":"TEXT","msg":"root\n |-- dst_bytes: long (nullable = true)\n |-- duration: long (nullable = true)\n |-- flag: string (nullable = true)\n |-- protocol_type: string (nullable = true)\n |-- service: string (nullable = true)\n |-- src_bytes: long (nullable = true)\n\n"},"dateCreated":"2017-02-02T03:41:31+0000","dateStarted":"2017-02-02T07:46:05+0000","dateFinished":"2017-02-02T07:46:05+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3484"},{"title":"Counting events by protocol (slide 98)","text":"%pyspark\ninteractions_df.select(\"protocol_type\", \"duration\", \"dst_bytes\")\\\n              .groupBy(\"protocol_type\").count().show()\ninteractions_df.select(\"protocol_type\", \"duration\",\\\n                      \"dst_bytes\").filter(interactions_df.duration>1000)\\\n                      .filter(interactions_df.dst_bytes==0)\\\n                      .groupBy(\"protocol_type\").count().show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486007141559_-703994274","id":"20170202-034541_948487905","result":{"code":"SUCCESS","type":"TEXT","msg":"+-------------+------+\n|protocol_type| count|\n+-------------+------+\n|          udp| 20354|\n|          tcp|190065|\n|         icmp|283602|\n+-------------+------+\n\n+-------------+-----+\n|protocol_type|count|\n+-------------+-----+\n|          tcp|  139|\n+-------------+-----+\n\n"},"dateCreated":"2017-02-02T03:45:41+0000","dateStarted":"2017-02-02T07:46:05+0000","dateFinished":"2017-02-02T07:46:22+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3485"},{"title":"Modifying the labels (slide 99)","text":"%pyspark\ndef get_label_type(label):\n    if label!=\"normal.\":\n        return \"attack\"\n    else:\n        return \"normal\"\n        \nrow_labeled_data = csv_rdd.map(lambda p: Row(\n    duration=int(p[0]),\n    protocol_type=p[1],\n    service=p[2],\n    flag=p[3],\n    src_bytes=int(p[4]),\n    dst_bytes=int(p[5]),\n    label=get_label_type(p[41])\n    )\n)\ninteractions_labeled_df = sqlContext.createDataFrame(row_labeled_data)\ninteractions_labeled_df.show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486007181898_-265118372","id":"20170202-034621_1716046307","result":{"code":"SUCCESS","type":"TEXT","msg":"+---------+--------+----+------+-------------+-------+---------+\n|dst_bytes|duration|flag| label|protocol_type|service|src_bytes|\n+---------+--------+----+------+-------------+-------+---------+\n|     5450|       0|  SF|normal|          tcp|   http|      181|\n|      486|       0|  SF|normal|          tcp|   http|      239|\n|     1337|       0|  SF|normal|          tcp|   http|      235|\n|     1337|       0|  SF|normal|          tcp|   http|      219|\n|     2032|       0|  SF|normal|          tcp|   http|      217|\n|     2032|       0|  SF|normal|          tcp|   http|      217|\n|     1940|       0|  SF|normal|          tcp|   http|      212|\n|     4087|       0|  SF|normal|          tcp|   http|      159|\n|      151|       0|  SF|normal|          tcp|   http|      210|\n|      786|       0|  SF|normal|          tcp|   http|      212|\n|      624|       0|  SF|normal|          tcp|   http|      210|\n|     1985|       0|  SF|normal|          tcp|   http|      177|\n|      773|       0|  SF|normal|          tcp|   http|      222|\n|     1169|       0|  SF|normal|          tcp|   http|      256|\n|      259|       0|  SF|normal|          tcp|   http|      241|\n|     1837|       0|  SF|normal|          tcp|   http|      260|\n|      261|       0|  SF|normal|          tcp|   http|      241|\n|      818|       0|  SF|normal|          tcp|   http|      257|\n|      255|       0|  SF|normal|          tcp|   http|      233|\n|      504|       0|  SF|normal|          tcp|   http|      233|\n+---------+--------+----+------+-------------+-------+---------+\nonly showing top 20 rows\n\n"},"dateCreated":"2017-02-02T03:46:21+0000","dateStarted":"2017-02-02T07:46:05+0000","dateFinished":"2017-02-02T07:46:22+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3486"},{"title":"Counting by labels (slide 100)","text":"%pyspark\ninteractions_labeled_df.select(\"label\", \"protocol_type\")\\\n                      .groupBy(\"label\", \"protocol_type\").count().show()","user":"admin","dateUpdated":"2017-02-02T07:45:53+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/python","title":true},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486007219113_1747164348","id":"20170202-034659_651172121","result":{"code":"SUCCESS","type":"TEXT","msg":"+------+-------------+------+\n| label|protocol_type| count|\n+------+-------------+------+\n|attack|         icmp|282314|\n|attack|          udp|  1177|\n|attack|          tcp|113252|\n|normal|         icmp|  1288|\n|normal|          udp| 19177|\n|normal|          tcp| 76813|\n+------+-------------+------+\n\n"},"dateCreated":"2017-02-02T03:46:59+0000","dateStarted":"2017-02-02T07:46:22+0000","dateFinished":"2017-02-02T07:46:31+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3487"},{"title":"Group by label and protocol (slide 101)","text":"%pyspark\ninteractions_labeled_df.select('label', 'protocol_type').groupBy('label', 'protocol_type').count().show()","user":"admin","dateUpdated":"2017-02-02T07:48:16+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"title":true,"editorMode":"ace/mode/scala"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486021245534_-1845922807","id":"20170202-074045_357090615","result":{"code":"SUCCESS","type":"TEXT","msg":"+------+-------------+------+\n| label|protocol_type| count|\n+------+-------------+------+\n|attack|         icmp|282314|\n|attack|          udp|  1177|\n|attack|          tcp|113252|\n|normal|         icmp|  1288|\n|normal|          udp| 19177|\n|normal|          tcp| 76813|\n+------+-------------+------+\n\n"},"dateCreated":"2017-02-02T07:40:45+0000","dateStarted":"2017-02-02T07:48:16+0000","dateFinished":"2017-02-02T07:48:24+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3488"},{"text":"%pyspark\ninteractions_labeled_df.select('label', 'protocol_type', 'dst_bytes').groupBy('label', 'protocol_type', interactions_labeled_df.dst_bytes==0).count().show()","user":"admin","dateUpdated":"2017-02-02T07:49:49+0000","config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486021623015_1109117311","id":"20170202-074703_864723953","result":{"code":"SUCCESS","type":"TEXT","msg":"+------+-------------+---------------+------+\n| label|protocol_type|(dst_bytes = 0)| count|\n+------+-------------+---------------+------+\n|normal|         icmp|           true|  1288|\n|attack|          udp|           true|  1166|\n|attack|          udp|          false|    11|\n|normal|          tcp|           true|  9313|\n|normal|          tcp|          false| 67500|\n|attack|          tcp|           true|110583|\n|attack|          tcp|          false|  2669|\n|normal|          udp|           true|  3594|\n|normal|          udp|          false| 15583|\n|attack|         icmp|           true|282314|\n+------+-------------+---------------+------+\n\n"},"dateCreated":"2017-02-02T07:47:03+0000","dateStarted":"2017-02-02T07:49:49+0000","dateFinished":"2017-02-02T07:49:57+0000","status":"FINISHED","progressUpdateIntervalMs":500,"$$hashKey":"object:3489"},{"config":{"colWidth":12,"graph":{"mode":"table","height":300,"optionOpen":false,"keys":[],"values":[],"groups":[],"scatter":{}},"enabled":true,"editorMode":"ace/mode/scala"},"settings":{"params":{},"forms":{}},"jobName":"paragraph_1486021662882_1840402377","id":"20170202-074742_703484774","dateCreated":"2017-02-02T07:47:42+0000","status":"READY","progressUpdateIntervalMs":500,"$$hashKey":"object:3490"}],"name":"BigData_Lecture_170201","id":"2CA543AF1","angularObjects":{"2C564P1ZC:shared_process":[],"2C59P4C9R:shared_process":[],"2C3P8E39F:shared_process":[],"2C49HJ26C:shared_process":[],"2C4KWV68J:shared_process":[],"2C3UF1C9F:shared_process":[]},"config":{"looknfeel":"default"},"info":{}}
+﻿{
+  "paragraphs": [
+    {
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486107922358_124745742",
+      "id": "20170203-074522_1240323190",
+      "dateCreated": "2017-02-03T07:45:22+0000",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500,
+      "focus": true,
+      "$$hashKey": "object:6413"
+    },
+    {
+      "title": "Big Data Lecture 2/1/17",
+      "text": "This notebook is based on week2.pdf, slides 33-101\nMuch of the material prior to slide 33 can be found in the notebook Hello World\nIf your Zeppelin notebooks are in folders, you should find Hello World under Getting Started.  Otherwise, it will just be at the top-level with \neverything else.",
+      "user": "admin",
+      "dateUpdated": "2017-02-03T07:45:13+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486001542205_1152417599",
+      "id": "20170202-021222_1768723482",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "2017-02-02T02:12:22+0000",
+      "dateStarted": "2017-02-02T07:45:52+0000",
+      "dateFinished": "2017-02-02T07:45:52+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3453"
+    },
+    {
+      "title": "Creating RDDs (slide 33)",
+      "text": "%pyspark\n\nmyRdd = sc. parallelize([1,2,3,4])\nmyRdd.map(lambda x: x+x)\nprint myRdd.take(2)\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:56:22+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486021967388_558448046",
+      "id": "20170202-075247_446153906",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "[1, 2]\n"
+      },
+      "dateCreated": "2017-02-02T07:52:47+0000",
+      "dateStarted": "2017-02-02T07:56:22+0000",
+      "dateFinished": "2017-02-02T07:56:22+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3454"
+    },
+    {
+      "title": "foreach() (slide 34)",
+      "text": "%pyspark\n\nrdd = sc.parallelize([1, 2, 3, 4])\n# rdd.foreach(lambda x: print(x))\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T08:00:14+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486022191111_936020822",
+      "id": "20170202-075631_1565414958",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "2017-02-02T07:56:31+0000",
+      "dateStarted": "2017-02-02T08:00:14+0000",
+      "dateFinished": "2017-02-02T08:00:14+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3455"
+    },
+    {
+      "title": "Reduce (slide 36)",
+      "text": "%pyspark\nsum = rdd.reduce(lambda x, y: x + y)\nprint sum\n\n# these won't work, ned to create a nums rdd and some other stuff, probably\n# sumCount = nums.aggregate((0, 0), (lambda acc, value: (acc[0] + value, acc[1] + 1)), (lambda acc1, acc2: (acc1[0] + acc2[0], acc1[1] + acc2[1])))\n# return sumCount[0] / float(sumCount[1])",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T08:06:00+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486022333194_1801872768",
+      "id": "20170202-075853_533268507",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "10\n"
+      },
+      "dateCreated": "2017-02-02T07:58:53+0000",
+      "dateStarted": "2017-02-02T08:06:00+0000",
+      "dateFinished": "2017-02-02T08:06:00+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3456"
+    },
+    {
+      "text": "%pyspark\n\ninput_file = \"hdfs:///tmp/kddcup.data_10_percent.gz\"\n\nraw_rdd = sc.textFile(input_file)\nprint raw_rdd.count()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486010547762_-1578381565",
+      "id": "20170202-044227_1387905609",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "494021\n"
+      },
+      "dateCreated": "2017-02-02T04:42:27+0000",
+      "dateStarted": "2017-02-02T07:45:52+0000",
+      "dateFinished": "2017-02-02T07:45:54+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3457"
+    },
+    {
+      "text": "%pyspark\r\rdf1 = sc.parallelize([Row(cid='101', name='Alice', age=25, state='ca'), Row(cid='102', name='Bob', age=15, state='ny'), Row(cid='103', name='Bob', age=23, state='nc'), Row(cid='104', name='Ram', age=45, state='fl')]).toDF()\r",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486004747680_-1353883306",
+      "id": "20170202-030547_1118986594",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "2017-02-02T03:05:47+0000",
+      "dateStarted": "2017-02-02T07:45:52+0000",
+      "dateFinished": "2017-02-02T07:45:54+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3458"
+    },
+    {
+      "text": "%pyspark\ndf2 = sc.parallelize([Row(cid='101', date='2015-03-12', product='toaster', price=200), Row(cid='104', date='2015-04-12', product='iron', price=120), Row(cid='102', date='2014-12-31', product='fridge', price=850), Row(cid='102', date='2015-02-03', product='cup', price=5)]).toDF()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486006414942_55859089",
+      "id": "20170202-033334_1656542187",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "2017-02-02T03:33:34+0000",
+      "dateStarted": "2017-02-02T07:45:54+0000",
+      "dateFinished": "2017-02-02T07:45:54+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3459"
+    },
+    {
+      "text": "%pyspark\nprint df1.first()\nprint df1.take(2)\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486008019375_933566565",
+      "id": "20170202-040019_1451025415",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "Row(age=25, cid=u'101', name=u'Alice', state=u'ca')\n[Row(age=25, cid=u'101', name=u'Alice', state=u'ca'), Row(age=15, cid=u'102', name=u'Bob', state=u'ny')]\n"
+      },
+      "dateCreated": "2017-02-02T04:00:19+0000",
+      "dateStarted": "2017-02-02T07:45:54+0000",
+      "dateFinished": "2017-02-02T07:45:54+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3460"
+    },
+    {
+      "text": "%pyspark\ndf1.show(99)\n# print '-----------<next thingy >--------'\nprint ' ' \nprint ' ' \ndf1.limit(2).show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486008068643_2047307361",
+      "id": "20170202-040108_1851654302",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \n \n+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n+---+---+-----+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T04:01:08+0000",
+      "dateStarted": "2017-02-02T07:45:54+0000",
+      "dateFinished": "2017-02-02T07:45:54+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3461"
+    },
+    {
+      "title": "Inspecting Schema (slide 74)",
+      "text": "%pyspark\ndf1.show(99)\nprint ' '\nprint df1.columns  #Display column names\nprint ' ' \nprint df1.dtypes  #Display column names and types\n\nprint ' ' \nprint df1.schema  #Display detailed schema\nprint ' ' \n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486008254892_-1064497415",
+      "id": "20170202-040414_39152403",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \n['age', 'cid', 'name', 'state']\n \n[('age', 'bigint'), ('cid', 'string'), ('name', 'string'), ('state', 'string')]\n \nStructType(List(StructField(age,LongType,true),StructField(cid,StringType,true),StructField(name,StringType,true),StructField(state,StringType,true)))\n \n"
+      },
+      "dateCreated": "2017-02-02T04:04:14+0000",
+      "dateStarted": "2017-02-02T07:45:54+0000",
+      "dateFinished": "2017-02-02T07:45:54+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3462"
+    },
+    {
+      "title": "Counting rows (slide 75)",
+      "text": "%pyspark\n\nprint df1.count()\nprint df1.rdd.count()\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486009359147_-1561521012",
+      "id": "20170202-042239_578808250",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "4\n4\n"
+      },
+      "dateCreated": "2017-02-02T04:22:39+0000",
+      "dateStarted": "2017-02-02T07:45:54+0000",
+      "dateFinished": "2017-02-02T07:45:54+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3463"
+    },
+    {
+      "title": "Extracting a smaller sample of the RDD (slide 77)",
+      "text": "%pyspark\n\ninput_file = \"hdfs:///tmp/kddcup.data_10_percent.gz\"\n\nraw_rdd = sc.textFile(input_file)\nraw_rdd_sample = raw_rdd.sample(False, 0.1, 1234)\n\nprint 'raw_rdd_sample has', raw_rdd_sample.count(), 'records'\nprint 'raw_rdd        has', raw_rdd.count(), 'records'",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486010882353_1917738100",
+      "id": "20170202-044802_383697225",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "raw_rdd_sample has 49493 records\nraw_rdd        has 494021 records\n"
+      },
+      "dateCreated": "2017-02-02T04:48:02+0000",
+      "dateStarted": "2017-02-02T07:45:54+0000",
+      "dateFinished": "2017-02-02T07:45:58+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3464"
+    },
+    {
+      "title": "Summary Statistics (slide 78)",
+      "text": "%pyspark\ndf1.describe().show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486015692819_-1053433589",
+      "id": "20170202-060812_1867203088",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+-------+------------------+\n|summary|               age|\n+-------+------------------+\n|  count|                 4|\n|   mean|              27.0|\n| stddev|12.754084313139327|\n|    min|                15|\n|    max|                45|\n+-------+------------------+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:08:12+0000",
+      "dateStarted": "2017-02-02T07:45:55+0000",
+      "dateFinished": "2017-02-02T07:45:58+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3465"
+    },
+    {
+      "title": "Removing duplicates (slide 79)",
+      "text": "%pyspark\ndf1.distinct().show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:52+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486015772421_609759285",
+      "id": "20170202-060932_722078326",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 23|103|  Bob|   nc|\n| 15|102|  Bob|   ny|\n| 45|104|  Ram|   fl|\n| 25|101|Alice|   ca|\n+---+---+-----+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:09:32+0000",
+      "dateStarted": "2017-02-02T07:45:58+0000",
+      "dateFinished": "2017-02-02T07:45:58+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3466"
+    },
+    {
+      "title": "Removing duplicate rows by speci c columns (slide 80)",
+      "text": "%pyspark\ndf1.drop_duplicates([\"name\"]).show()\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486015840773_-82480607",
+      "id": "20170202-061040_1038147835",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 45|104|  Ram|   fl|\n| 25|101|Alice|   ca|\n| 23|103|  Bob|   nc|\n+---+---+-----+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:10:40+0000",
+      "dateStarted": "2017-02-02T07:45:58+0000",
+      "dateFinished": "2017-02-02T07:45:59+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3467"
+    },
+    {
+      "title": "Sorting rows (slide 81)",
+      "text": "%pyspark\n# desc means descending, not describe!\ndf1.sort(df1[\"age\"].desc()).show()\nprint ' '\ndf1.sort(\"age\", ascending=True).show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486016269168_-1988361381",
+      "id": "20170202-061749_129250159",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 45|104|  Ram|   fl|\n| 25|101|Alice|   ca|\n| 23|103|  Bob|   nc|\n| 15|102|  Bob|   ny|\n+---+---+-----+-----+\n\n \n+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 25|101|Alice|   ca|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:17:49+0000",
+      "dateStarted": "2017-02-02T07:45:59+0000",
+      "dateFinished": "2017-02-02T07:45:59+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3468"
+    },
+    {
+      "title": "Adding a column (slide 82)",
+      "text": "%pyspark\ndf1.withColumn('age-dog-years', df1.age*7).show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486016532272_-138120889",
+      "id": "20170202-062212_1528928092",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+-------------+\n|age|cid| name|state|age-dog-years|\n+---+---+-----+-----+-------------+\n| 25|101|Alice|   ca|          175|\n| 15|102|  Bob|   ny|          105|\n| 23|103|  Bob|   nc|          161|\n| 45|104|  Ram|   fl|          315|\n+---+---+-----+-----+-------------+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:22:12+0000",
+      "dateStarted": "2017-02-02T07:45:59+0000",
+      "dateFinished": "2017-02-02T07:45:59+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3469"
+    },
+    {
+      "title": "Renaming a column (slide 83)",
+      "text": "%pyspark\n\ndf1.withColumnRenamed('age', 'age2').show()\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486016610859_-17939670",
+      "id": "20170202-062330_1288746118",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+----+---+-----+-----+\n|age2|cid| name|state|\n+----+---+-----+-----+\n|  25|101|Alice|   ca|\n|  15|102|  Bob|   ny|\n|  23|103|  Bob|   nc|\n|  45|104|  Ram|   fl|\n+----+---+-----+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:23:30+0000",
+      "dateStarted": "2017-02-02T07:45:59+0000",
+      "dateFinished": "2017-02-02T07:45:59+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3470"
+    },
+    {
+      "title": "select() operator (slide 84)",
+      "text": "%pyspark\n# DataFrames allow the developer to only select some columns of the DataFrame.\n\ndf1.select('name', 'age').show()\nprint ' ' \ndf1.select(df1.name, df1.age*7).show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486016672638_1048660902",
+      "id": "20170202-062432_1380000715",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+-----+---+\n| name|age|\n+-----+---+\n|Alice| 25|\n|  Bob| 15|\n|  Bob| 23|\n|  Ram| 45|\n+-----+---+\n\n \n+-----+---------+\n| name|(age * 7)|\n+-----+---------+\n|Alice|      175|\n|  Bob|      105|\n|  Bob|      161|\n|  Ram|      315|\n+-----+---------+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:24:32+0000",
+      "dateStarted": "2017-02-02T07:45:59+0000",
+      "dateFinished": "2017-02-02T07:45:59+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3471"
+    },
+    {
+      "title": "selectExpr() operator (slide 85)",
+      "text": "%pyspark\n# The select expression accepts a sql query\ndf1.selectExpr('substr(name,1,3)', 'age*7').show()\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486016814195_1190034482",
+      "id": "20170202-062654_420131878",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+----------------+---------+\n|substr(name,1,3)|(age * 7)|\n+----------------+---------+\n|             Ali|      175|\n|             Bob|      105|\n|             Bob|      161|\n|             Ram|      315|\n+----------------+---------+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:26:54+0000",
+      "dateStarted": "2017-02-02T07:46:00+0000",
+      "dateFinished": "2017-02-02T07:46:00+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3472"
+    },
+    {
+      "title": "Column expression (slide 86)",
+      "text": "%pyspark\n# Operations can be done on column objects, here are some examples:\n# Cast to type: \ndf1.age.cast('string')\n# df1.show()\n# print ' ' \n\n#Rename a column: \ndf1.age.alias('age2')\n\n#Sort a column: \ndf1.age.asc()\ndf1.age.desc() \n \n\n# Substring: \ndf1.name.substr(1,3) \n\n# Between:\ndf1.age.between(25, 34) # 25<=age<=34",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486017052468_1014325184",
+      "id": "20170202-063052_1092878917",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "2017-02-02T06:30:52+0000",
+      "dateStarted": "2017-02-02T07:46:00+0000",
+      "dateFinished": "2017-02-02T07:46:00+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3473"
+    },
+    {
+      "title": "Dropping columns (slide 87)",
+      "text": "%pyspark\rdf1.drop('age').show()\r",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486018068901_-138699395",
+      "id": "20170202-064748_1366362056",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+-----+-----+\n|cid| name|state|\n+---+-----+-----+\n|101|Alice|   ca|\n|102|  Bob|   ny|\n|103|  Bob|   nc|\n|104|  Ram|   fl|\n+---+-----+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:47:48+0000",
+      "dateStarted": "2017-02-02T07:46:00+0000",
+      "dateFinished": "2017-02-02T07:46:00+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3474"
+    },
+    {
+      "title": "Filtering rows (slide 88)",
+      "text": "%pyspark\n# DataFrames support  filtering rows, like with the Core RDD library\nprint 'original df1'\ndf1.show()\nprint ' '\n\nprint 'filtered'\ndf1.filter(df1.age>21).show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486017811223_-1009369188",
+      "id": "20170202-064331_1610919923",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "original df1\n+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \nfiltered\n+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:43:31+0000",
+      "dateStarted": "2017-02-02T07:46:00+0000",
+      "dateFinished": "2017-02-02T07:46:00+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3475"
+    },
+    {
+      "title": "groupBy() (slide 89)",
+      "text": "%pyspark\n# DataFrames provide a groupBy api. After using a groupBy, ensure an aggregator comes next\ndf1.show()\nprint ' ' \n\ndf1.groupBy('name').count().show()\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486018381833_-109213292",
+      "id": "20170202-065301_2056257216",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \n+-----+-----+\n| name|count|\n+-----+-----+\n|  Ram|    1|\n|Alice|    1|\n|  Bob|    2|\n+-----+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:53:01+0000",
+      "dateStarted": "2017-02-02T07:46:00+0000",
+      "dateFinished": "2017-02-02T07:46:01+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3476"
+    },
+    {
+      "title": "groupBy and sum() (slide 90)",
+      "text": "%pyspark\ndf2.show()\nprint ' ' \n\ndf2.select(df2[\"date\"].substr(1,4).alias(\"year\"), df2[\"price\"]).groupBy(\"year\").sum().show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486018499862_-1894094088",
+      "id": "20170202-065459_938819619",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+----------+-----+-------+\n|cid|      date|price|product|\n+---+----------+-----+-------+\n|101|2015-03-12|  200|toaster|\n|104|2015-04-12|  120|   iron|\n|102|2014-12-31|  850| fridge|\n|102|2015-02-03|    5|    cup|\n+---+----------+-----+-------+\n\n \n+----+----------+\n|year|sum(price)|\n+----+----------+\n|2014|       850|\n|2015|       325|\n+----+----------+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:54:59+0000",
+      "dateStarted": "2017-02-02T07:46:01+0000",
+      "dateFinished": "2017-02-02T07:46:01+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3477"
+    },
+    {
+      "title": "groupBy and agg() (slide 91)",
+      "text": "%pyspark\n\n# DataFrames provide a generic function for implementing aggregations after groupBy.\n# The agg() takes a dictionary mapping column names to aggregate functions (min, max, \n# count, avg, sum). There can be multiple columns in the groupBy as well, just separate\n# them with commas\n\ndf2.show()\nprint ' '\n\ndf2.select(df2['date'].substr(1,4).alias('year'), df2['price']).groupBy('year').agg({'price': 'avg', 'year': 'count'}).show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486018557046_567437430",
+      "id": "20170202-065557_1055540894",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+----------+-----+-------+\n|cid|      date|price|product|\n+---+----------+-----+-------+\n|101|2015-03-12|  200|toaster|\n|104|2015-04-12|  120|   iron|\n|102|2014-12-31|  850| fridge|\n|102|2015-02-03|    5|    cup|\n+---+----------+-----+-------+\n\n \n+----+-----------+------------------+\n|year|count(year)|        avg(price)|\n+----+-----------+------------------+\n|2014|          1|             850.0|\n|2015|          3|108.33333333333333|\n+----+-----------+------------------+\n\n"
+      },
+      "dateCreated": "2017-02-02T06:55:57+0000",
+      "dateStarted": "2017-02-02T07:46:01+0000",
+      "dateFinished": "2017-02-02T07:46:02+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3478"
+    },
+    {
+      "title": "Inner Join with Data Frames (print 92)",
+      "text": "%pyspark\ndf1.show()\nprint ' '\n\ndf2.show()\nprint ' ' \n\ndf1.join(df2, df1[\"cid\"]==df2[\"cid\"], \"inner\").show()\n\n",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486018884110_-1116979052",
+      "id": "20170202-070124_284801631",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+\n|age|cid| name|state|\n+---+---+-----+-----+\n| 25|101|Alice|   ca|\n| 15|102|  Bob|   ny|\n| 23|103|  Bob|   nc|\n| 45|104|  Ram|   fl|\n+---+---+-----+-----+\n\n \n+---+----------+-----+-------+\n|cid|      date|price|product|\n+---+----------+-----+-------+\n|101|2015-03-12|  200|toaster|\n|104|2015-04-12|  120|   iron|\n|102|2014-12-31|  850| fridge|\n|102|2015-02-03|    5|    cup|\n+---+----------+-----+-------+\n\n \n+---+---+-----+-----+---+----------+-----+-------+\n|age|cid| name|state|cid|      date|price|product|\n+---+---+-----+-----+---+----------+-----+-------+\n| 25|101|Alice|   ca|101|2015-03-12|  200|toaster|\n| 15|102|  Bob|   ny|102|2014-12-31|  850| fridge|\n| 15|102|  Bob|   ny|102|2015-02-03|    5|    cup|\n| 45|104|  Ram|   fl|104|2015-04-12|  120|   iron|\n+---+---+-----+-----+---+----------+-----+-------+\n\n"
+      },
+      "dateCreated": "2017-02-02T07:01:24+0000",
+      "dateStarted": "2017-02-02T07:46:02+0000",
+      "dateFinished": "2017-02-02T07:46:02+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3479"
+    },
+    {
+      "title": "Other types of join (slide 93)",
+      "text": "%pyspark\ndf1.join(df2, \"cid\", \"inner\").show()\nprint ' ' \n\ndf1.join(df2, df1[\"cid\"]==df2[\"cid\"], \"inner\").show()\nprint ' ' ",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486019007947_852366678",
+      "id": "20170202-070327_1856424785",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+-----+-----+----------+-----+-------+\n|cid|age| name|state|      date|price|product|\n+---+---+-----+-----+----------+-----+-------+\n|101| 25|Alice|   ca|2015-03-12|  200|toaster|\n|102| 15|  Bob|   ny|2014-12-31|  850| fridge|\n|102| 15|  Bob|   ny|2015-02-03|    5|    cup|\n|104| 45|  Ram|   fl|2015-04-12|  120|   iron|\n+---+---+-----+-----+----------+-----+-------+\n\n \n+---+---+-----+-----+---+----------+-----+-------+\n|age|cid| name|state|cid|      date|price|product|\n+---+---+-----+-----+---+----------+-----+-------+\n| 25|101|Alice|   ca|101|2015-03-12|  200|toaster|\n| 15|102|  Bob|   ny|102|2014-12-31|  850| fridge|\n| 15|102|  Bob|   ny|102|2015-02-03|    5|    cup|\n| 45|104|  Ram|   fl|104|2015-04-12|  120|   iron|\n+---+---+-----+-----+---+----------+-----+-------+\n\n \n"
+      },
+      "dateCreated": "2017-02-02T07:03:27+0000",
+      "dateStarted": "2017-02-02T07:46:02+0000",
+      "dateFinished": "2017-02-02T07:46:04+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3480"
+    },
+    {
+      "title": "Multiple Conditions in joinExpr (slide 94)",
+      "text": "%pyspark\n\n# DataFrames also supports multiple condititions in the joinExpr\ndf1.join(df2, (df1['cid']==df2['cid']) & (df2['price'] > 200), 'inner').show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486019282797_-773583818",
+      "id": "20170202-070802_2083744601",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---+---+----+-----+---+----------+-----+-------+\n|age|cid|name|state|cid|      date|price|product|\n+---+---+----+-----+---+----------+-----+-------+\n| 15|102| Bob|   ny|102|2014-12-31|  850| fridge|\n+---+---+----+-----+---+----------+-----+-------+\n\n"
+      },
+      "dateCreated": "2017-02-02T07:08:02+0000",
+      "dateStarted": "2017-02-02T07:46:03+0000",
+      "dateFinished": "2017-02-02T07:46:04+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3481"
+    },
+    {
+      "title": "Creating a Schema and creating a DataFrame (slide 95)",
+      "text": "%pyspark\ninput_file = \"hdfs:///tmp/kddcup.data_10_percent.gz\"\n\nraw_rdd = sc.textFile(input_file)\nprint raw_rdd.take(1)\nprint ' '\n\ncsv_rdd = raw_rdd.map(lambda x: x.split(\",\"))\nprint csv_rdd.take(1)\nprint ' ' \n\nrow_data = csv_rdd.map(lambda p: Row(\n    duration=int(p[0]),\n    protocol_type=p[1],\n    service=p[2],\n    flag=p[3],\n    src_bytes=int(p[4]),\n    dst_bytes=int(p[5])\n    )\n)\n\ninteractions_df = sqlContext.createDataFrame(row_data)\ninteractions_df.registerTempTable(\"interactions\")",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486019950120_475241068",
+      "id": "20170202-071910_2075399594",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "[u'0,tcp,http,SF,181,5450,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,8,8,0.00,0.00,0.00,0.00,1.00,0.00,0.00,9,9,1.00,0.00,0.11,0.00,0.00,0.00,0.00,0.00,normal.']\n \n[[u'0', u'tcp', u'http', u'SF', u'181', u'5450', u'0', u'0', u'0', u'0', u'0', u'1', u'0', u'0', u'0', u'0', u'0', u'0', u'0', u'0', u'0', u'0', u'8', u'8', u'0.00', u'0.00', u'0.00', u'0.00', u'1.00', u'0.00', u'0.00', u'9', u'9', u'1.00', u'0.00', u'0.11', u'0.00', u'0.00', u'0.00', u'0.00', u'0.00', u'normal.']]\n \n"
+      },
+      "dateCreated": "2017-02-02T07:19:10+0000",
+      "dateStarted": "2017-02-02T07:46:04+0000",
+      "dateFinished": "2017-02-02T07:46:04+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3482"
+    },
+    {
+      "title": "Quering with SQL (slide 96)",
+      "text": "%sql\r\rSELECT duration, dst_bytes FROM interactions\rWHERE protocol_type = 'tcp'\rAND duration > 1000\rAND dst_bytes = 0\r",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486006871430_333305730",
+      "id": "20170202-034111_1072074873",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "duration\tdst_bytes\n5057\t0\n5059\t0\n5051\t0\n5056\t0\n5051\t0\n5039\t0\n5062\t0\n5041\t0\n5056\t0\n5064\t0\n5043\t0\n5061\t0\n5049\t0\n5061\t0\n5048\t0\n5047\t0\n5044\t0\n5063\t0\n5068\t0\n5062\t0\n5046\t0\n5052\t0\n5044\t0\n5054\t0\n5039\t0\n5058\t0\n5051\t0\n5032\t0\n5063\t0\n5040\t0\n5051\t0\n5066\t0\n5044\t0\n5051\t0\n5036\t0\n5055\t0\n2426\t0\n5047\t0\n5057\t0\n5037\t0\n5057\t0\n5062\t0\n5051\t0\n5051\t0\n5053\t0\n5064\t0\n5044\t0\n5051\t0\n5033\t0\n5066\t0\n5063\t0\n5056\t0\n5042\t0\n5063\t0\n5060\t0\n5056\t0\n5049\t0\n5043\t0\n5039\t0\n5041\t0\n42448\t0\n42088\t0\n41065\t0\n40929\t0\n40806\t0\n40682\t0\n40571\t0\n40448\t0\n40339\t0\n40232\t0\n40121\t0\n36783\t0\n36674\t0\n36570\t0\n36467\t0\n36323\t0\n36204\t0\n32038\t0\n31925\t0\n31809\t0\n31709\t0\n31601\t0\n31501\t0\n31401\t0\n31301\t0\n31194\t0\n31061\t0\n30935\t0\n30835\t0\n30735\t0\n30619\t0\n30518\t0\n30418\t0\n30317\t0\n30217\t0\n30077\t0\n25420\t0\n22921\t0\n22821\t0\n22721\t0\n22616\t0\n22516\t0\n22416\t0\n22316\t0\n22216\t0\n21987\t0\n21887\t0\n21767\t0\n21661\t0\n21561\t0\n21455\t0\n21334\t0\n21223\t0\n21123\t0\n20983\t0\n14682\t0\n14420\t0\n14319\t0\n14198\t0\n14098\t0\n13998\t0\n13898\t0\n13796\t0\n13678\t0\n13578\t0\n13448\t0\n13348\t0\n13241\t0\n13141\t0\n13033\t0\n12933\t0\n12833\t0\n12733\t0\n12001\t0\n5678\t0\n5010\t0\n1298\t0\n1031\t0\n36438\t0\n",
+        "comment": "",
+        "msgTable": [
+          [
+            {
+              "key": "dst_bytes",
+              "value": "5057"
+            },
+            {
+              "key": "dst_bytes",
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5059"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5051"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5056"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5051"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5039"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5062"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5041"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5056"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5064"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5043"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5061"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5049"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5061"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5048"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5047"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5044"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5063"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5068"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5062"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5046"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5052"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5044"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5054"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5039"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5058"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5051"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5032"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5063"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5040"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5051"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5066"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5044"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5051"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5036"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5055"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "2426"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5047"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5057"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5037"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5057"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5062"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5051"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5051"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5053"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5064"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5044"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5051"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5033"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5066"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5063"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5056"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5042"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5063"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5060"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5056"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5049"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5043"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5039"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5041"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "42448"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "42088"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "41065"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "40929"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "40806"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "40682"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "40571"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "40448"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "40339"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "40232"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "40121"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "36783"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "36674"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "36570"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "36467"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "36323"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "36204"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "32038"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31925"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31809"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31709"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31601"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31501"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31401"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31301"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31194"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "31061"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30935"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30835"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30735"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30619"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30518"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30418"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30317"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30217"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "30077"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "25420"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "22921"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "22821"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "22721"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "22616"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "22516"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "22416"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "22316"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "22216"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21987"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21887"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21767"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21661"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21561"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21455"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21334"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21223"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "21123"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "20983"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "14682"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "14420"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "14319"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "14198"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "14098"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13998"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13898"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13796"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13678"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13578"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13448"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13348"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13241"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13141"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "13033"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "12933"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "12833"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "12733"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "12001"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5678"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "5010"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "1298"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "1031"
+            },
+            {
+              "value": "0"
+            }
+          ],
+          [
+            {
+              "value": "36438"
+            },
+            {
+              "value": "0"
+            }
+          ]
+        ],
+        "columnNames": [
+          {
+            "name": "duration",
+            "index": 0,
+            "aggr": "sum"
+          },
+          {
+            "name": "dst_bytes",
+            "index": 1,
+            "aggr": "sum"
+          }
+        ],
+        "rows": [
+          [
+            "5057",
+            "0"
+          ],
+          [
+            "5059",
+            "0"
+          ],
+          [
+            "5051",
+            "0"
+          ],
+          [
+            "5056",
+            "0"
+          ],
+          [
+            "5051",
+            "0"
+          ],
+          [
+            "5039",
+            "0"
+          ],
+          [
+            "5062",
+            "0"
+          ],
+          [
+            "5041",
+            "0"
+          ],
+          [
+            "5056",
+            "0"
+          ],
+          [
+            "5064",
+            "0"
+          ],
+          [
+            "5043",
+            "0"
+          ],
+          [
+            "5061",
+            "0"
+          ],
+          [
+            "5049",
+            "0"
+          ],
+          [
+            "5061",
+            "0"
+          ],
+          [
+            "5048",
+            "0"
+          ],
+          [
+            "5047",
+            "0"
+          ],
+          [
+            "5044",
+            "0"
+          ],
+          [
+            "5063",
+            "0"
+          ],
+          [
+            "5068",
+            "0"
+          ],
+          [
+            "5062",
+            "0"
+          ],
+          [
+            "5046",
+            "0"
+          ],
+          [
+            "5052",
+            "0"
+          ],
+          [
+            "5044",
+            "0"
+          ],
+          [
+            "5054",
+            "0"
+          ],
+          [
+            "5039",
+            "0"
+          ],
+          [
+            "5058",
+            "0"
+          ],
+          [
+            "5051",
+            "0"
+          ],
+          [
+            "5032",
+            "0"
+          ],
+          [
+            "5063",
+            "0"
+          ],
+          [
+            "5040",
+            "0"
+          ],
+          [
+            "5051",
+            "0"
+          ],
+          [
+            "5066",
+            "0"
+          ],
+          [
+            "5044",
+            "0"
+          ],
+          [
+            "5051",
+            "0"
+          ],
+          [
+            "5036",
+            "0"
+          ],
+          [
+            "5055",
+            "0"
+          ],
+          [
+            "2426",
+            "0"
+          ],
+          [
+            "5047",
+            "0"
+          ],
+          [
+            "5057",
+            "0"
+          ],
+          [
+            "5037",
+            "0"
+          ],
+          [
+            "5057",
+            "0"
+          ],
+          [
+            "5062",
+            "0"
+          ],
+          [
+            "5051",
+            "0"
+          ],
+          [
+            "5051",
+            "0"
+          ],
+          [
+            "5053",
+            "0"
+          ],
+          [
+            "5064",
+            "0"
+          ],
+          [
+            "5044",
+            "0"
+          ],
+          [
+            "5051",
+            "0"
+          ],
+          [
+            "5033",
+            "0"
+          ],
+          [
+            "5066",
+            "0"
+          ],
+          [
+            "5063",
+            "0"
+          ],
+          [
+            "5056",
+            "0"
+          ],
+          [
+            "5042",
+            "0"
+          ],
+          [
+            "5063",
+            "0"
+          ],
+          [
+            "5060",
+            "0"
+          ],
+          [
+            "5056",
+            "0"
+          ],
+          [
+            "5049",
+            "0"
+          ],
+          [
+            "5043",
+            "0"
+          ],
+          [
+            "5039",
+            "0"
+          ],
+          [
+            "5041",
+            "0"
+          ],
+          [
+            "42448",
+            "0"
+          ],
+          [
+            "42088",
+            "0"
+          ],
+          [
+            "41065",
+            "0"
+          ],
+          [
+            "40929",
+            "0"
+          ],
+          [
+            "40806",
+            "0"
+          ],
+          [
+            "40682",
+            "0"
+          ],
+          [
+            "40571",
+            "0"
+          ],
+          [
+            "40448",
+            "0"
+          ],
+          [
+            "40339",
+            "0"
+          ],
+          [
+            "40232",
+            "0"
+          ],
+          [
+            "40121",
+            "0"
+          ],
+          [
+            "36783",
+            "0"
+          ],
+          [
+            "36674",
+            "0"
+          ],
+          [
+            "36570",
+            "0"
+          ],
+          [
+            "36467",
+            "0"
+          ],
+          [
+            "36323",
+            "0"
+          ],
+          [
+            "36204",
+            "0"
+          ],
+          [
+            "32038",
+            "0"
+          ],
+          [
+            "31925",
+            "0"
+          ],
+          [
+            "31809",
+            "0"
+          ],
+          [
+            "31709",
+            "0"
+          ],
+          [
+            "31601",
+            "0"
+          ],
+          [
+            "31501",
+            "0"
+          ],
+          [
+            "31401",
+            "0"
+          ],
+          [
+            "31301",
+            "0"
+          ],
+          [
+            "31194",
+            "0"
+          ],
+          [
+            "31061",
+            "0"
+          ],
+          [
+            "30935",
+            "0"
+          ],
+          [
+            "30835",
+            "0"
+          ],
+          [
+            "30735",
+            "0"
+          ],
+          [
+            "30619",
+            "0"
+          ],
+          [
+            "30518",
+            "0"
+          ],
+          [
+            "30418",
+            "0"
+          ],
+          [
+            "30317",
+            "0"
+          ],
+          [
+            "30217",
+            "0"
+          ],
+          [
+            "30077",
+            "0"
+          ],
+          [
+            "25420",
+            "0"
+          ],
+          [
+            "22921",
+            "0"
+          ],
+          [
+            "22821",
+            "0"
+          ],
+          [
+            "22721",
+            "0"
+          ],
+          [
+            "22616",
+            "0"
+          ],
+          [
+            "22516",
+            "0"
+          ],
+          [
+            "22416",
+            "0"
+          ],
+          [
+            "22316",
+            "0"
+          ],
+          [
+            "22216",
+            "0"
+          ],
+          [
+            "21987",
+            "0"
+          ],
+          [
+            "21887",
+            "0"
+          ],
+          [
+            "21767",
+            "0"
+          ],
+          [
+            "21661",
+            "0"
+          ],
+          [
+            "21561",
+            "0"
+          ],
+          [
+            "21455",
+            "0"
+          ],
+          [
+            "21334",
+            "0"
+          ],
+          [
+            "21223",
+            "0"
+          ],
+          [
+            "21123",
+            "0"
+          ],
+          [
+            "20983",
+            "0"
+          ],
+          [
+            "14682",
+            "0"
+          ],
+          [
+            "14420",
+            "0"
+          ],
+          [
+            "14319",
+            "0"
+          ],
+          [
+            "14198",
+            "0"
+          ],
+          [
+            "14098",
+            "0"
+          ],
+          [
+            "13998",
+            "0"
+          ],
+          [
+            "13898",
+            "0"
+          ],
+          [
+            "13796",
+            "0"
+          ],
+          [
+            "13678",
+            "0"
+          ],
+          [
+            "13578",
+            "0"
+          ],
+          [
+            "13448",
+            "0"
+          ],
+          [
+            "13348",
+            "0"
+          ],
+          [
+            "13241",
+            "0"
+          ],
+          [
+            "13141",
+            "0"
+          ],
+          [
+            "13033",
+            "0"
+          ],
+          [
+            "12933",
+            "0"
+          ],
+          [
+            "12833",
+            "0"
+          ],
+          [
+            "12733",
+            "0"
+          ],
+          [
+            "12001",
+            "0"
+          ],
+          [
+            "5678",
+            "0"
+          ],
+          [
+            "5010",
+            "0"
+          ],
+          [
+            "1298",
+            "0"
+          ],
+          [
+            "1031",
+            "0"
+          ],
+          [
+            "36438",
+            "0"
+          ]
+        ]
+      },
+      "dateCreated": "2017-02-02T03:41:11+0000",
+      "dateStarted": "2017-02-02T07:46:04+0000",
+      "dateFinished": "2017-02-02T07:46:13+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3483"
+    },
+    {
+      "title": "Printing the Schema (slide 97)",
+      "text": "%pyspark\ninteractions_df.printSchema()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486006891141_-2179987",
+      "id": "20170202-034131_2036569484",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "root\n |-- dst_bytes: long (nullable = true)\n |-- duration: long (nullable = true)\n |-- flag: string (nullable = true)\n |-- protocol_type: string (nullable = true)\n |-- service: string (nullable = true)\n |-- src_bytes: long (nullable = true)\n\n"
+      },
+      "dateCreated": "2017-02-02T03:41:31+0000",
+      "dateStarted": "2017-02-02T07:46:05+0000",
+      "dateFinished": "2017-02-02T07:46:05+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3484"
+    },
+    {
+      "title": "Counting events by protocol (slide 98)",
+      "text": "%pyspark\ninteractions_df.select(\"protocol_type\", \"duration\", \"dst_bytes\")\\\n              .groupBy(\"protocol_type\").count().show()\ninteractions_df.select(\"protocol_type\", \"duration\",\\\n                      \"dst_bytes\").filter(interactions_df.duration>1000)\\\n                      .filter(interactions_df.dst_bytes==0)\\\n                      .groupBy(\"protocol_type\").count().show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486007141559_-703994274",
+      "id": "20170202-034541_948487905",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+-------------+------+\n|protocol_type| count|\n+-------------+------+\n|          udp| 20354|\n|          tcp|190065|\n|         icmp|283602|\n+-------------+------+\n\n+-------------+-----+\n|protocol_type|count|\n+-------------+-----+\n|          tcp|  139|\n+-------------+-----+\n\n"
+      },
+      "dateCreated": "2017-02-02T03:45:41+0000",
+      "dateStarted": "2017-02-02T07:46:05+0000",
+      "dateFinished": "2017-02-02T07:46:22+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3485"
+    },
+    {
+      "title": "Modifying the labels (slide 99)",
+      "text": "%pyspark\ndef get_label_type(label):\n    if label!=\"normal.\":\n        return \"attack\"\n    else:\n        return \"normal\"\n        \nrow_labeled_data = csv_rdd.map(lambda p: Row(\n    duration=int(p[0]),\n    protocol_type=p[1],\n    service=p[2],\n    flag=p[3],\n    src_bytes=int(p[4]),\n    dst_bytes=int(p[5]),\n    label=get_label_type(p[41])\n    )\n)\ninteractions_labeled_df = sqlContext.createDataFrame(row_labeled_data)\ninteractions_labeled_df.show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486007181898_-265118372",
+      "id": "20170202-034621_1716046307",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+---------+--------+----+------+-------------+-------+---------+\n|dst_bytes|duration|flag| label|protocol_type|service|src_bytes|\n+---------+--------+----+------+-------------+-------+---------+\n|     5450|       0|  SF|normal|          tcp|   http|      181|\n|      486|       0|  SF|normal|          tcp|   http|      239|\n|     1337|       0|  SF|normal|          tcp|   http|      235|\n|     1337|       0|  SF|normal|          tcp|   http|      219|\n|     2032|       0|  SF|normal|          tcp|   http|      217|\n|     2032|       0|  SF|normal|          tcp|   http|      217|\n|     1940|       0|  SF|normal|          tcp|   http|      212|\n|     4087|       0|  SF|normal|          tcp|   http|      159|\n|      151|       0|  SF|normal|          tcp|   http|      210|\n|      786|       0|  SF|normal|          tcp|   http|      212|\n|      624|       0|  SF|normal|          tcp|   http|      210|\n|     1985|       0|  SF|normal|          tcp|   http|      177|\n|      773|       0|  SF|normal|          tcp|   http|      222|\n|     1169|       0|  SF|normal|          tcp|   http|      256|\n|      259|       0|  SF|normal|          tcp|   http|      241|\n|     1837|       0|  SF|normal|          tcp|   http|      260|\n|      261|       0|  SF|normal|          tcp|   http|      241|\n|      818|       0|  SF|normal|          tcp|   http|      257|\n|      255|       0|  SF|normal|          tcp|   http|      233|\n|      504|       0|  SF|normal|          tcp|   http|      233|\n+---------+--------+----+------+-------------+-------+---------+\nonly showing top 20 rows\n\n"
+      },
+      "dateCreated": "2017-02-02T03:46:21+0000",
+      "dateStarted": "2017-02-02T07:46:05+0000",
+      "dateFinished": "2017-02-02T07:46:22+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3486"
+    },
+    {
+      "title": "Counting by labels (slide 100)",
+      "text": "%pyspark\ninteractions_labeled_df.select(\"label\", \"protocol_type\")\\\n                      .groupBy(\"label\", \"protocol_type\").count().show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:45:53+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/python",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486007219113_1747164348",
+      "id": "20170202-034659_651172121",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+------+-------------+------+\n| label|protocol_type| count|\n+------+-------------+------+\n|attack|         icmp|282314|\n|attack|          udp|  1177|\n|attack|          tcp|113252|\n|normal|         icmp|  1288|\n|normal|          udp| 19177|\n|normal|          tcp| 76813|\n+------+-------------+------+\n\n"
+      },
+      "dateCreated": "2017-02-02T03:46:59+0000",
+      "dateStarted": "2017-02-02T07:46:22+0000",
+      "dateFinished": "2017-02-02T07:46:31+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3487"
+    },
+    {
+      "title": "Group by label and protocol (slide 101)",
+      "text": "%pyspark\ninteractions_labeled_df.select('label', 'protocol_type').groupBy('label', 'protocol_type').count().show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:48:16+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "title": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486021245534_-1845922807",
+      "id": "20170202-074045_357090615",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+------+-------------+------+\n| label|protocol_type| count|\n+------+-------------+------+\n|attack|         icmp|282314|\n|attack|          udp|  1177|\n|attack|          tcp|113252|\n|normal|         icmp|  1288|\n|normal|          udp| 19177|\n|normal|          tcp| 76813|\n+------+-------------+------+\n\n"
+      },
+      "dateCreated": "2017-02-02T07:40:45+0000",
+      "dateStarted": "2017-02-02T07:48:16+0000",
+      "dateFinished": "2017-02-02T07:48:24+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3488"
+    },
+    {
+      "text": "%pyspark\ninteractions_labeled_df.select('label', 'protocol_type', 'dst_bytes').groupBy('label', 'protocol_type', interactions_labeled_df.dst_bytes==0).count().show()",
+      "user": "admin",
+      "dateUpdated": "2017-02-02T07:49:49+0000",
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486021623015_1109117311",
+      "id": "20170202-074703_864723953",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+------+-------------+---------------+------+\n| label|protocol_type|(dst_bytes = 0)| count|\n+------+-------------+---------------+------+\n|normal|         icmp|           true|  1288|\n|attack|          udp|           true|  1166|\n|attack|          udp|          false|    11|\n|normal|          tcp|           true|  9313|\n|normal|          tcp|          false| 67500|\n|attack|          tcp|           true|110583|\n|attack|          tcp|          false|  2669|\n|normal|          udp|           true|  3594|\n|normal|          udp|          false| 15583|\n|attack|         icmp|           true|282314|\n+------+-------------+---------------+------+\n\n"
+      },
+      "dateCreated": "2017-02-02T07:47:03+0000",
+      "dateStarted": "2017-02-02T07:49:49+0000",
+      "dateFinished": "2017-02-02T07:49:57+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3489"
+    },
+    {
+      "config": {
+        "colWidth": 12,
+        "graph": {
+          "mode": "table",
+          "height": 300,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1486021662882_1840402377",
+      "id": "20170202-074742_703484774",
+      "dateCreated": "2017-02-02T07:47:42+0000",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:3490"
+    }
+  ],
+  "name": "BigData_Lecture_170201",
+  "id": "2CA543AF1",
+  "angularObjects": {
+    "2C564P1ZC:shared_process": [],
+    "2C59P4C9R:shared_process": [],
+    "2C3P8E39F:shared_process": [],
+    "2C49HJ26C:shared_process": [],
+    "2C4KWV68J:shared_process": [],
+    "2C3UF1C9F:shared_process": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
