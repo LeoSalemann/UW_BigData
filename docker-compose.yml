@@ -1,0 +1,136 @@
+version: '2'
+
+##################################################################################33
+# docker-compose.yml
+# By Leo Salemann leos@uw.edu
+# 01/16/2017
+# based on the AWS deploy discussion for BIGDATA 210B at
+# https://canvas.uw.edu/courses/1105250/discussion_topics/3521037
+# and the container available at hub.docker.com
+#   https://hub.docker.com/r/khwunchai/hortonworks-sandbox/
+#
+# This script will provide one command to download the hortonworks sandbox 2.5
+# image, configure it with the right ports, start it.
+# The only commands you'll need are:
+# % docker-compose up
+# % docker-compose start
+# % docker-compose stop
+# % docker logs -f bigdata_sandbox_1
+#
+# This script is suitable for running docker on your own machine. The total RAM
+# footprint should be 3gb or less.  I've only seen it use 1.9 on a Macbook Pro
+# Adjust tthe --memory argument below if you
+# need to constrain docker to run in less RAM than that.
+#
+# To run the first time.
+# 1) Go to wwww.docker.com, download docker for your OS (Windows, OSX, Linux)
+# 2) Make a new directory, call it bigdata, put this .yml there.
+# 3) In a terminal or command prompt, go to you new directory and type 
+#    'docker-compose up' (no quotes).  Be patient it'll download a 14GB docker 
+#    container, then it will start  up automatically.
+# 4) point your browser to localhost:8888 and you'll have the Hortonworks sandbox
+#    home page.  Click Launch Dashboard to bring up Ambari
+#
+# When you're done.
+# 1) Go to the terminal where you typed docker-compose up, and hit Ctl-C
+# 2) Type docker-compose stop
+# 
+# For every session after the first.
+# 1) Type 'docker-compose start' (no quotes) to begin
+# 2) Type 'docker logs -f bigdata_sandbox_1' (no quotes) so you
+#    can watch the startup sequence.
+# 3) When you're done for the day, type Ctrl-C then 'docker-compose stop'
+#
+#
+# ALSO SEE:
+#  Hortonworks docker image:
+#   http://hortonworks.com/downloads/#sandbox
+#  Hortonworks doccker setup instructions:
+#   http://hortonworks.com/hadoop-tutorial/hortonworks-sandbox-guide/#section_4
+#
+#
+# KNOWN ISSUES
+# In the lab exercise for BIGDATA 201B Assignment 1, the following error comes up
+# after changing the spark.yarn.queue from default to spark:
+#   Warning yarn.nodemanager.resource.memory-mb 2250 is greater than the recommended
+#           maximum of 1997. Amount of physical memory, in MB, that can be allocated 
+#           for containers.
+#
+# DISCLAIMERS: No guarantees or warranties, use at your own risk.
+# 
+####################################################################################
+
+services:
+  sandbox:
+    image: khwunchai/hortonworks-sandbox:2.5
+    privileged: true
+    hostname: sandbox.hortonworks.com
+
+    # adjust this if you want to change the max amt of ram docker can use.
+    mem_limit: 3g
+
+    # another way to adjust memory google up docker-comose memswap_limit to learn more
+#    memswap_limit: 3g
+    ports:
+      - 6080:6080
+      - 9090:9090
+      - 9000:9000
+      - 8000:8000
+      - 8020:8020
+      - 42111:42111
+      - 10500:10500
+      - 16030:16030
+      - 8042:8042 
+      - 8040:8040
+      - 2100:2100
+      - 4200:4200
+      - 4040:4040 
+      - 8050:8050
+      - 9996:9996 
+      - 9995:9995
+      - 8080:8080 
+      - 8088:8088 
+      - 8886:8886 
+      - 8889:8889 
+      - 8443:8443 
+      - 8744:8744 
+      - 8888:8888 
+      - 8188:8188 
+      - 8983:8983 
+      - 1000:1000 
+      - 1100:1100 
+      - 11000:11000 
+      - 10001:10001 
+      - 15000:15000 
+      - 10000:10000 
+      - 8993:8993 
+      - 1988:1988 
+      - 5007:5007 
+      - 50070:50070 
+      - 19888:19888 
+      - 16010:16010 
+      - 50111:50111 
+      - 50075:50075 
+      - 50095:50095 
+      - 18080:18080 
+      - 60000:60000 
+      - 8090:8090 
+      - 8091:8091 
+      - 8005:8005 
+      - 8086:8086 
+      - 8082:8082 
+      - 60080:60080 
+      - 8765:8765 
+      - 5011:5011 
+      - 6001:6001 
+      - 6003:6003 
+      - 6008:6008 
+      - 1220:1220 
+      - 21000:21000 
+      - 6188:6188 
+      - 61888:61888 
+
+    volumes:
+      - hadoop:/hadoop
+volumes:
+  hadoop: {}
