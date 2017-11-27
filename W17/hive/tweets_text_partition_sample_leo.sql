@@ -1,0 +1,1 @@
+SELECT fulltext FROM tweets_text_partition WHERE fulltext LIKE '%coordinate%';

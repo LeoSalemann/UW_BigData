@@ -1,0 +1,1 @@
+SELECT msg FROM tweets_text_partition WHERE msg LIKE '%Blanch%';
