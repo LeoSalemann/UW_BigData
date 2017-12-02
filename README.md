@@ -31,4 +31,6 @@ Opening sentence about the platform(s) used
 - Final Project description & links
 - [code](https://github.com/LeoSalemann/UW_BigData/tree/master/Q3_Su17)
 
+## Also see datasets (e.g. Hive CSVs) at [on S3 drive](https://s3.console.aws.amazon.com/s3/buckets/leos-uw-bigdata)
+
 Readme composed & edited based on [adam-p's Markown Cheatsheet for github](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
