@@ -11,7 +11,7 @@
 ## Quarter 1: Winter 2017 [Introduction to Data Engineering](https://www.pce.uw.edu/courses/introduction-to-data-engineering)
 Used Hortonworks Data Platform (HDP) Sandbox 2.5 on Amazon EC2
 - Performed basic administration with Ambari and YARN.
-- Ran spark jobs in Apache Zeppelin/pyspark
+- Ran spark jobs (mapreduce, dataframes, aggreage) in Apache Zeppelin/pyspark
 - tbd, add more learning info
 - mention Hive, HBASE, Phoenix
 - Mention Nifi & Kafka
